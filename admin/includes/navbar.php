@@ -4,7 +4,7 @@
     <nav class="admin-header navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <!-- logo -->
       <div class="text-start navbar-brand-wrapper">
-        <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo-dark.png" alt="" ></a>
+        <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo-dark.png" alt=""></a>
         <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-icon-dark.png" alt=""></a>
       </div>
       <!-- Top bar left -->
@@ -25,7 +25,7 @@
       <!-- top bar right -->
       <ul class="nav navbar-nav ms-auto">
         <li class="nav-item fullscreen">
-          <a id="btnFullscreen" href="#" class="nav-link" ><i class="ti-fullscreen"></i></a>
+          <a id="btnFullscreen" href="#" class="nav-link"><i class="ti-fullscreen"></i></a>
         </li>
         <li class="nav-item dropdown ">
           <a class="nav-link top-nav" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -53,12 +53,20 @@
             </div>
             <div class="dropdown-divider"></div>
             <div class="nav-grid">
-              <a href="#" class="nav-grid-item"><i class="ti-files text-primary"></i><h5>New Task</h5></a>
-              <a href="#" class="nav-grid-item"><i class="ti-check-box text-success"></i><h5>Assign Task</h5></a>
+              <a href="#" class="nav-grid-item"><i class="ti-files text-primary"></i>
+                <h5>New Task</h5>
+              </a>
+              <a href="#" class="nav-grid-item"><i class="ti-check-box text-success"></i>
+                <h5>Assign Task</h5>
+              </a>
             </div>
             <div class="nav-grid">
-              <a href="#" class="nav-grid-item"><i class="ti-pencil-alt text-warning"></i><h5>Add Orders</h5></a>
-              <a href="#" class="nav-grid-item"><i class="ti-truck text-danger "></i><h5>New Orders</h5></a>
+              <a href="#" class="nav-grid-item"><i class="ti-pencil-alt text-warning"></i>
+                <h5>Add Orders</h5>
+              </a>
+              <a href="#" class="nav-grid-item"><i class="ti-truck text-danger "></i>
+                <h5>New Orders</h5>
+              </a>
             </div>
           </div>
         </li>
@@ -78,7 +86,11 @@
             <a class="dropdown-item" href="#"><i class="text-dark ti-layers-alt"></i>Projects <span class="badge bg-info">6</span> </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#"><i class="text-info ti-settings"></i>Settings</a>
-            <a class="dropdown-item" href="#"><i class="text-danger ti-unlock"></i>Logout</a>
+            <!-- <a class="dropdown-item" href="#"><i class="text-danger ti-unlock"></i>Logout</a> -->
+            <form action="login_sigunup/logout.php" method="POST">
+              <button type="submit" name="logout_btn" class="dropdown-item"><i class="fa fa-sign-out fa-fw"></i>Logout</button>
+            </form>
+
           </div>
         </li>
       </ul>
