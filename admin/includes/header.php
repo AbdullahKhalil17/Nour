@@ -7,7 +7,7 @@
 <meta name="description" content="Webmin - Bootstrap 5 & Angular 5 Admin Dashboard Template" />
 <meta name="author" content="potenzaglobalsolutions.com" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>Webmin - Bootstrap 5 & Angular 5 Admin Dashboard Template</title>
+<title><?php echo $pageTitle ?></title>
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="assets/images/favicon.ico" />

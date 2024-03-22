@@ -1,10 +1,11 @@
 <?php
+ob_start();
 session_start();
+$pageTitle = "Create Client";
 include('includes/header.php');
 include('includes/navbar.php');
 include('includes/sidebar.php');
 include('config/condb.php');
-$pageTitle = "Create Client";
 
 if (isset($_POST['saveData'])) {
   $clientName = $_POST['client_name'];

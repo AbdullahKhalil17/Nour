@@ -1,5 +1,7 @@
 <?php
+ob_start();
 session_start();
+$pageTitle = "Dashboard";
 include('includes/header.php');
 include('includes/navbar.php');
 include('includes/sidebar.php');
@@ -34,17 +36,20 @@ include('config/condb.php');
               </span>
             </div>
             <div class="float-end text-end">
-              <p class="card-text text-dark">Visitors</p>
-              <h4>65,650</h4>
+              <p class="card-text text-dark">Products</p>
+              <?php
+                $sql = "SELECT COUNT(*) as count FROM product";
+                $sql_run = mysqli_query($con, $sql);
+                $row = mysqli_fetch_row($sql_run);
+                $count = $row[0]
+                ?>
+                <h4><?php echo $count; ?></h4>
             </div>
           </div>
-          <p class="text-muted pt-3 mb-0 mt-2 border-top">
-            <i class="fa fa-exclamation-circle me-1" aria-hidden="true"></i> 81% lower growth
-          </p>
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-lg-6 col-md-6 mb-20">
+    <!-- <div class="col-xl-3 col-lg-6 col-md-6 mb-20">
       <div class="card card-statistics h-100">
         <div class="card-body">
           <div class="clearfix">
@@ -103,7 +108,7 @@ include('config/condb.php');
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <!-- Orders Status widgets-->
   <?php

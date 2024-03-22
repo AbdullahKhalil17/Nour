@@ -1,11 +1,11 @@
 <?php
   ob_start();
   session_start();
+  $pageTitle = "Edit Client Data";
   include('includes/header.php');
   include('includes/navbar.php');
   include('includes/sidebar.php');
   include('config/condb.php');
-  $pageTitle = "Edit Client Data";
 
   if(isset($_POST['saveData']))
   {
