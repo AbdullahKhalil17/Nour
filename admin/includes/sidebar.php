@@ -15,6 +15,7 @@
             <li>
                 <li><a href="createClient.php">Create Clent</a></li>
                 <li><a href="product.php">Product</a></li>
+                <li><a href="order.php">Order</a></li>
             </li>
           </ul>
         </div>
