@@ -1,16 +1,18 @@
 <?php
-session_start();
+// session_start();
 include('admin/config/condb.php');
 
-// تحقق من وجود متغيرات السلة في الجلسة
 $totalItems = 0;
-$totalAmount = 0;
+$totalAmount = 0; 
 if (isset($_SESSION['cart'])) {
   foreach ($_SESSION['cart'] as $item) {
-    $totalItems += $item['quantity'];
-    $totalAmount += $item['price'] * $item['quantity'];
+    $quantity = intval($item['quantity']);
+    $price = floatval($item['price']);
+    $totalItems += $quantity;
+    $totalAmount += $price * $quantity;
   }
 }
+
 ?>
 <!-- Start Header Area -->
 <header class="header navbar-area">
@@ -62,15 +64,31 @@ if (isset($_SESSION['cart'])) {
           <div class="top-end">
             <div class="user">
               <i class="lni lni-user"></i>
-              Hello
+              <?php
+              // التحقق مما إذا كانت هناك بيانات مستخدم مخزنة في الجلسة
+              if (isset($_SESSION['user_data'])) {
+                $user_data = $_SESSION['user_data'];
+                // عرض اسم المستخدم
+                echo "Hello " . $user_data['client_name'];
+              } else {
+                // إذا لم يتم تسجيل الدخول، عرض رسالة عامة
+                echo "Hello Guest";
+              }
+              ?>
             </div>
             <ul class="user-login">
-              <li>
-                <a href="login.html">Sign In</a>
-              </li>
-              <li>
-                <a href="register.html">Register</a>
-              </li>
+              <?php if (isset($_SESSION['user_data'])) : ?>
+                <li>
+                  <a href="logout.php">Sign Out</a>
+                </li>
+              <?php else : ?>
+                <li>
+                  <a href="login.html">Sign In</a>
+                </li>
+                <li>
+                  <a href="register.html">Register</a>
+                </li>
+              <?php endif; ?>
             </ul>
           </div>
         </div>
@@ -199,7 +217,7 @@ if (isset($_SESSION['cart'])) {
                       <span class="total-amount">$<?php echo $totalAmount; ?></span>
                     </div>
                     <div class="button">
-                      <a href="checkout.html" class="btn animate">Checkout</a>
+                      <a href="viewCart.php" class="btn animate">View Cart</a>
                     </div>
                   </div>
                 </div>
@@ -260,7 +278,7 @@ if (isset($_SESSION['cart'])) {
             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
               <ul id="nav" class="navbar-nav ms-auto">
                 <li class="nav-item">
-                  <a href="index.html" class="active" aria-label="Toggle navigation">Home</a>
+                  <a href="index.php" class="active" aria-label="Toggle navigation">Home</a>
                 </li>
                 <li class="nav-item">
                   <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#submenu-1-2" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Pages</a>

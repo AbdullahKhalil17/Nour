@@ -52,9 +52,6 @@ if (isset($_SESSION['cart'])) {
       'total_price' => $quantity * $product['price'] // حساب السعر الإجمالي
   );
 }
-
-   
-    // إعادة حساب العدد الإجمالي للعناصر والمبلغ الإجمالي
     $totalItems = 0;
     $totalAmount = 0;
     foreach($_SESSION['cart'] as $item) {

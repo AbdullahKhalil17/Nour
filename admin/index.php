@@ -49,6 +49,34 @@ include('config/condb.php');
         </div>
       </div>
     </div>
+
+
+    <div class="col-xl-3 col-lg-6 col-md-6 mb-20">
+      <div class="card card-statistics h-100">
+        <div class="card-body">
+          <div class="clearfix">
+            <div class="float-start">
+              <span class="text-danger">
+                <i class="fa fa-bar-chart-o highlight-icon" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="float-end text-end">
+              <p class="card-text text-dark">Money</p>
+              <?php
+                $sql = "SELECT SUM(order_total) FROM orders;                ";
+                $sql_run = mysqli_query($con, $sql);
+                $row = mysqli_fetch_row($sql_run);
+                $count = $row[0]
+                ?>
+                <h4><?php echo $count; ?> L.E</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
     <!-- <div class="col-xl-3 col-lg-6 col-md-6 mb-20">
       <div class="card card-statistics h-100">
         <div class="card-body">

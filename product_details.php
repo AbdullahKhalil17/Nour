@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 include('admin/config/condb.php');
 include('web/includes/header.php');
 ?>
@@ -9,7 +9,7 @@ include('web/includes/header.php');
   <?php
   include('web/includes/main-header.php');
   ?>
-  <!-- End Header Area -->
+
 
 
   <?php
@@ -72,7 +72,6 @@ include('web/includes/header.php');
   <?php
   include('web/includes/footer.php')
   ?>
-  <!-- تضمين مكتبة jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
     function addToCart(productId) {
