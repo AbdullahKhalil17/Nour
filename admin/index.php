@@ -38,12 +38,12 @@ include('config/condb.php');
             <div class="float-end text-end">
               <p class="card-text text-dark">Products</p>
               <?php
-                $sql = "SELECT COUNT(*) as count FROM product";
-                $sql_run = mysqli_query($con, $sql);
-                $row = mysqli_fetch_row($sql_run);
-                $count = $row[0]
-                ?>
-                <h4><?php echo $count; ?></h4>
+              $sql = "SELECT COUNT(*) as count FROM product";
+              $sql_run = mysqli_query($con, $sql);
+              $row = mysqli_fetch_row($sql_run);
+              $count = $row[0]
+              ?>
+              <h4><?php echo $count; ?></h4>
             </div>
           </div>
         </div>
@@ -63,80 +63,123 @@ include('config/condb.php');
             <div class="float-end text-end">
               <p class="card-text text-dark">Money</p>
               <?php
-                $sql = "SELECT SUM(order_total) FROM orders;                ";
-                $sql_run = mysqli_query($con, $sql);
-                $row = mysqli_fetch_row($sql_run);
-                $count = $row[0]
-                ?>
-                <h4><?php echo $count; ?> L.E</h4>
+              $sql = "SELECT SUM(order_total) FROM orders;                ";
+              $sql_run = mysqli_query($con, $sql);
+              $row = mysqli_fetch_row($sql_run);
+              $count = $row[0]
+              ?>
+              <h4><?php echo $count; ?> L.E</h4>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <h4>Product</h4>
 
-
-    <!-- <div class="col-xl-3 col-lg-6 col-md-6 mb-20">
-      <div class="card card-statistics h-100">
-        <div class="card-body">
-          <div class="clearfix">
-            <div class="float-start">
-              <span class="text-warning">
-                <i class="fa fa-shopping-cart highlight-icon" aria-hidden="true"></i>
-              </span>
-            </div>
-            <div class="float-end text-end">
-              <p class="card-text text-dark">Orders</p>
-              <h4>656</h4>
+    <div class="row">
+      <div class="col-md-12 mb-30">
+        <div class="card card-statistics h-100">
+          <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade active show" role="tabpanel" aria-labelledby="customer-tab">
+                <div class="table-responsive mt-15">
+                  <table style="text-align: center" class="table center-aligned-table table-hover mb-0">
+                    <thead>
+                      <tr class="table-info text-danger" style="font-family: 'Cairo', sans-serif;">
+                        <th>اسم المنتج</th>
+                        <th> السعر</th>
+                        <th>بلد المنشاء</th>
+                        <th>العمليات</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $sql = "SELECT * FROM product";
+                      $sql_run = mysqli_query($con, $sql);
+                      if (mysqli_num_rows($sql_run) > 0) {
+                        foreach ($sql_run as $item) {
+                      ?>
+                          <tr style="font-family: 'Cairo', sans-serif;">
+                            <td><?= $item['product_name'] ?></td>
+                            <td><?= $item['price'] ?></td>
+                            <td><?= $item['made_in'] ?></td>
+                            <td>
+                              <!-- <a href="<?php $item['id'] ?>">تعديل</a> -->
+                              <a href="editProduct.php?id=<?php echo $item['id']; ?>">تعديل</a>
+                            </td>
+                          </tr>
+                      <?php
+                        }
+                      }
+                      ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
-          <p class="text-muted pt-3 mb-0 mt-2 border-top">
-            <i class="fa fa-bookmark-o me-1" aria-hidden="true"></i> Total sales
-          </p>
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-lg-6 col-md-6 mb-20">
+    
+    <h4>Order</h4>
+    <div class="row">
+    <div class="col-md-12 mb-30">
       <div class="card card-statistics h-100">
         <div class="card-body">
-          <div class="clearfix">
-            <div class="float-start">
-              <span class="text-success">
-                <i class="fa fa-dollar highlight-icon" aria-hidden="true"></i>
-              </span>
-            </div>
-            <div class="float-end text-end">
-              <p class="card-text text-dark">Revenue</p>
-              <h4>$65656</h4>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade active show" role="tabpanel" aria-labelledby="customer-tab">
+              <div class="table-responsive mt-15">
+                <table style="text-align: center" class="table center-aligned-table table-hover mb-0">
+                  <thead>
+                    <tr class="table-info text-danger" style="font-family: 'Cairo', sans-serif;">
+                      <th>اسم العميل</th>
+                      <th>رقم الطلب</th>
+                      <th>قيمة الطلب</th>
+                      <th>حالة الطلب</th>
+                      <th>تاريخ الطلب</th>
+                      <th>العمليات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $sql = "SELECT clients.client_name, orders.id, orders.order_number, orders.client_id, orders.order_total, orders.order_status, orders.order_date FROM clients, orders WHERE clients.id = orders.client_id";
+                    $sql_run = mysqli_query($con, $sql);
+                    if (mysqli_num_rows($sql_run) > 0) {
+                      foreach ($sql_run as $item) {
+                    ?>
+                        <tr style="font-family: 'Cairo', sans-serif;">
+                          <td><?= $item['client_name'] ?></td>
+                          <td><?= $item['order_number'] ?></td>
+                          <td><?= $item['order_total'] ?></td>
+                          <td>
+                            <?php
+                              if ($item['order_status'] == 2) {
+                                echo "لم يتم تأكيد الطلب";
+                              } else {
+                                echo "تم تأكيد الطلب";
+                              }
+                            ?>
+                          </td>
+                          <td><?= $item['order_date'] ?></td>
+                          <td>
+                            <a href="#" class="edit-order btn btn-primary" data-order-id="<?= $item['id']; ?>">تعديل</a>
+                          </td>
+                        </tr>
+                    <?php
+                      }
+                    }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-          <p class="text-muted pt-3 mb-0 mt-2 border-top">
-            <i class="fa fa-calendar me-1" aria-hidden="true"></i> Sales Per Week
-          </p>
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-lg-6 col-md-6 mb-20">
-      <div class="card card-statistics h-100">
-        <div class="card-body">
-          <div class="clearfix">
-            <div class="float-start">
-              <span class="text-primary">
-                <i class="fa fa-twitter highlight-icon" aria-hidden="true"></i>
-              </span>
-            </div>
-            <div class="float-end text-end">
-              <p class="card-text text-dark">Followers</p>
-              <h4>62,500+</h4>
-            </div>
-          </div>
-          <p class="text-muted pt-3 mb-0 mt-2 border-top">
-            <i class="fa fa-repeat me-1" aria-hidden="true"></i> Just Updated
-          </p>
-        </div>
-      </div>
-    </div> -->
+  </div>
   </div>
   <!-- Orders Status widgets-->
   <?php
